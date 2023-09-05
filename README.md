@@ -1,3 +1,25 @@
+<img align="left" src="https://github.com/BlackyDrum/simple-chat/assets/111639941/56e2acdc-f67b-4632-b75d-0ebc281793a9" />
+
+<br />
+
+<img src="https://github.com/BlackyDrum/simple-chat/assets/111639941/abab0f82-a2c0-4ae9-a65c-98c11a8078b7"><br /><br />
+
+**Made with Laravel, Vue and Inertia**
+
+<br />
+
+[![Generic badge](https://img.shields.io/badge/Status-In_Progress-orange.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/License-MIT-<COLOR>.svg)](https://shields.io/) 
+ 
+<br />
+
+<img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white"> <img src="https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D"> <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"> <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white">
+
+
+
+<p>
+Description...
+</p>
+
 ## Requirements
 <ul>
     <li>PHP: ^8.1</li>
