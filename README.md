@@ -2,7 +2,7 @@
 
 <br />
 
-<img src="https://github.com/BlackyDrum/simple-chat/assets/111639941/abab0f82-a2c0-4ae9-a65c-98c11a8078b7"><br /><br />
+<img src="https://github.com/BlackyDrum/simple-chat/assets/111639941/abab0f82-a2c0-4ae9-a65c-98c11a8078b7"><br />
 
 **Made with Laravel, Vue and Inertia**
 
