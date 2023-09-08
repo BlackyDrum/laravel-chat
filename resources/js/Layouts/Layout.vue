@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <div class="min-h-screen dark:bg-gray-900">
+    <div class="min-h-screen dark:text-white dark:bg-gray-900">
         <slot/>
     </div>
 </template>
