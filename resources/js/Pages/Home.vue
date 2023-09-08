@@ -29,12 +29,13 @@ const sendMessage = () => {
             <div class="m-auto" v-if="!$page.props.auth.user">
                 Please Login to access the Chat
             </div>
-            <div class="grid grid-rows-[88%,12%]" v-else>
-                <ScrollPanel class="h-[48rem] w-[95%] self-center mx-auto bg-gray-800 rounded-lg">
+            <div class="my-auto" v-else>
+                <ScrollPanel class="h-[48rem] w-[95%] self-center mx-auto bg-gray-800 rounded-t-lg">
 
                 </ScrollPanel>
-                <div class="flex">
-                    <InputText class="w-[95%] h-16 mx-auto bg-gray-800 rounded-lg" v-model="message" @keydown.enter="sendMessage" placeholder="Type a Message"/>
+                <div class="flex w-[95%] h-32 mx-auto bg-gray-800 rounded-b-lg">
+                    <InputText class="w-[95%] h-14 m-auto bg-gray-800 rounded-lg" placeholder="Type a Message"
+                               v-model="message" @keydown.enter="sendMessage"/>
                 </div>
             </div>
         </div>
