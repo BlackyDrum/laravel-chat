@@ -20,14 +20,17 @@ const sendMessage = () => {
 
     <Layout>
         <div class="grid grid-cols-[15%,85%] min-h-screen">
+            <!-- Left Sidebar -->
             <div class="border-r border-gray-400">
 
             </div>
+
+            <!-- Chat -->
             <div class="m-auto" v-if="!$page.props.auth.user">
                 Please Login to access the Chat
             </div>
             <div class="grid grid-rows-[88%,12%]" v-else>
-                <ScrollPanel class="h-[90%] w-[95%] self-center mx-auto bg-gray-800 rounded-lg">
+                <ScrollPanel class="h-[48rem] w-[95%] self-center mx-auto bg-gray-800 rounded-lg">
 
                 </ScrollPanel>
                 <div class="flex">
