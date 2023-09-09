@@ -30,8 +30,8 @@ const sendMessage = () => {
     <Layout>
         <div class="grid grid-cols-[15%,85%] min-h-screen">
             <!-- Left Sidebar -->
-            <div class="grid grid-rows-[25%,75%] bg-gray-800 border-r border-gray-400">
-                <div class="border-b border-gray-400">
+            <div class="grid grid-rows-[25%,75%] bg-gray-800 border-r-4 border-gray-400">
+                <div class="border-b-4 border-gray-400">
                     <div class="flex flex-wrap h-full" v-if="!user">
                         <Button class="w-3/4 m-auto" label="Sign in with Google" severity="secondary" icon="pi pi-google" outlined style="background-color: white"/>
                         <Button class="w-3/4 m-auto" label="Sign in with Github" severity="secondary" icon="pi pi-github" outlined style="background-color: white"/>
