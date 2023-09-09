@@ -1,6 +1,6 @@
 <script setup>
 import {Head, Link, router, usePage} from '@inertiajs/vue3';
-import {onMounted, ref} from "vue";
+import {onMounted, onUpdated, ref} from "vue";
 
 import Layout from "@/Layouts/Layout.vue";
 
@@ -13,6 +13,9 @@ onMounted(() => {
     user.value = page.props.auth.user;
 })
 
+onUpdated(() => {
+    user.value = page.props.auth.user;
+})
 
 const page = usePage();
 
