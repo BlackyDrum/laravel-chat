@@ -1,5 +1,5 @@
 <script setup>
-import {Head, Link, usePage} from '@inertiajs/vue3';
+import {Head, Link, router, usePage} from '@inertiajs/vue3';
 import {onMounted, ref} from "vue";
 
 import Layout from "@/Layouts/Layout.vue";
@@ -7,6 +7,7 @@ import Layout from "@/Layouts/Layout.vue";
 import ScrollPanel from 'primevue/scrollpanel';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
+import Avatar from 'primevue/avatar';
 
 onMounted(() => {
     user.value = page.props.auth.user;
@@ -27,9 +28,9 @@ const sendMessage = () => {
     <Head title="Home" />
 
     <Layout>
-        <div class="grid grid-cols-[25%,75%] min-h-screen">
+        <div class="grid grid-cols-[15%,85%] min-h-screen">
             <!-- Left Sidebar -->
-            <div class="grid grid-rows-[25%,75%] border-r border-gray-400">
+            <div class="grid grid-rows-[25%,75%] bg-gray-800 border-r border-gray-400">
                 <div class="border-b border-gray-400">
                     <div class="flex flex-wrap h-full" v-if="!user">
                         <Button class="w-3/4 m-auto" label="Sign in with Google" severity="secondary" icon="pi pi-google" outlined style="background-color: white"/>
@@ -38,8 +39,9 @@ const sendMessage = () => {
                             <Button class="w-3/4 m-auto" label="Alt Login" severity="secondary" icon="pi pi-user" outlined style="background-color: white"/>
                         </Link>
                     </div>
-                    <div v-else>
-
+                    <div class="flex h-full w-full" v-else>
+                        <Button class="w-3/4 mt-auto mx-auto mb-2" label="Logout" severity="secondary" icon="pi pi-arrow-left" outlined style="background-color: white"
+                                @click="router.post('/logout')"/>
                     </div>
                 </div>
             </div>
