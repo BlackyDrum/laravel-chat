@@ -9,7 +9,7 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Avatar from 'primevue/avatar';
 
-
+// VUE DIRECTIVES
 onBeforeMount(() => {
     Echo.private('chat')
         .listen('MessageSent', (e) => {
@@ -29,12 +29,14 @@ onUpdated(() => {
     user.value = page.props.auth.user;
 })
 
+// VARIABLES
 const page = usePage();
 
 const message = ref(null);
 const user = ref(null);
 
 
+// METHODS
 const sendMessage = () => {
     message.value = null;
 }
