@@ -1,6 +1,6 @@
 <script setup>
 import {Head, Link, router, usePage} from '@inertiajs/vue3';
-import {onMounted, onUpdated, ref} from "vue";
+import {onBeforeMount, onBeforeUnmount, onMounted, onUpdated, ref} from "vue";
 
 import Layout from "@/Layouts/Layout.vue";
 
@@ -9,8 +9,20 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Avatar from 'primevue/avatar';
 
+
+onBeforeMount(() => {
+    Echo.private('chat')
+        .listen('MessageSent', (e) => {
+            console.log(e);
+        });
+})
+
 onMounted(() => {
     user.value = page.props.auth.user;
+})
+
+onBeforeUnmount(() => {
+    Echo.leave('chat');
 })
 
 onUpdated(() => {
@@ -21,6 +33,7 @@ const page = usePage();
 
 const message = ref(null);
 const user = ref(null);
+
 
 const sendMessage = () => {
     message.value = null;
