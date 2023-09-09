@@ -6,6 +6,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 defineProps({
     canResetPassword: {
@@ -88,6 +89,11 @@ const submit = () => {
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
                 </PrimaryButton>
+                <Link href="/register">
+                    <SecondaryButton class="ml-4">
+                        Register
+                    </SecondaryButton>
+                </Link>
             </div>
         </form>
     </GuestLayout>
