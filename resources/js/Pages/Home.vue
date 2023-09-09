@@ -1,6 +1,6 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
-import {ref} from "vue";
+import {Head, Link, usePage} from '@inertiajs/vue3';
+import {onMounted, ref} from "vue";
 
 import Layout from "@/Layouts/Layout.vue";
 
@@ -8,7 +8,15 @@ import ScrollPanel from 'primevue/scrollpanel';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 
+onMounted(() => {
+    user.value = page.props.auth.user;
+})
+
+
+const page = usePage();
+
 const message = ref(null);
+const user = ref(null);
 
 const sendMessage = () => {
     message.value = null;
@@ -19,14 +27,25 @@ const sendMessage = () => {
     <Head title="Home" />
 
     <Layout>
-        <div class="grid grid-cols-[15%,85%] min-h-screen">
+        <div class="grid grid-cols-[25%,75%] min-h-screen">
             <!-- Left Sidebar -->
-            <div class="border-r border-gray-400">
+            <div class="grid grid-rows-[25%,75%] border-r border-gray-400">
+                <div class="border-b border-gray-400">
+                    <div class="flex flex-wrap h-full" v-if="!user">
+                        <Button class="w-3/4 m-auto" label="Sign in with Google" severity="secondary" icon="pi pi-google" outlined style="background-color: white"/>
+                        <Button class="w-3/4 m-auto" label="Sign in with Github" severity="secondary" icon="pi pi-github" outlined style="background-color: white"/>
+                        <Link class="flex w-full" href="/login">
+                            <Button class="w-3/4 m-auto" label="Alt Login" severity="secondary" icon="pi pi-user" outlined style="background-color: white"/>
+                        </Link>
+                    </div>
+                    <div v-else>
 
+                    </div>
+                </div>
             </div>
 
             <!-- Chat -->
-            <div class="m-auto" v-if="!$page.props.auth.user">
+            <div class="m-auto" v-if="!user">
                 Please Login to access the Chat
             </div>
             <div class="my-auto" v-else>
@@ -41,3 +60,6 @@ const sendMessage = () => {
         </div>
     </Layout>
 </template>
+
+<style scoped>
+</style>
