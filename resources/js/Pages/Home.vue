@@ -28,9 +28,9 @@ const sendMessage = () => {
     <Head title="Home" />
 
     <Layout>
-        <div class="grid grid-cols-[15%,85%] min-h-screen">
+        <div class="grid grid-cols-[20%,80%] max-2xl:grid-cols-[35%,65%] max-md:grid-cols-[45%,55%] min-h-screen">
             <!-- Left Sidebar -->
-            <div class="grid grid-rows-[25%,75%] bg-gray-800 border-r-4 border-gray-400">
+            <div class="grid grid-rows-[25%,75%] max-sm:grid-rows-[50%,50%] bg-gray-800 border-r-4 border-gray-400">
                 <div class="border-b-4 border-gray-400">
                     <div class="flex flex-wrap h-full" v-if="!user">
                         <Button class="w-3/4 m-auto" label="Sign in with Google" severity="secondary" icon="pi pi-google" outlined style="background-color: white"/>
@@ -47,7 +47,7 @@ const sendMessage = () => {
             </div>
 
             <!-- Chat -->
-            <div class="m-auto" v-if="!user">
+            <div class="m-auto text-center" v-if="!user">
                 Please Login to access the Chat
             </div>
             <div class="my-auto" v-else>
