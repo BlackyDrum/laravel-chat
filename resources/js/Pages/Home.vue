@@ -48,7 +48,7 @@ const sendMessage = () => {
     <Layout>
         <div class="grid grid-cols-[20%,80%] max-2xl:grid-cols-[35%,65%] max-md:grid-cols-[45%,55%] min-h-screen">
             <!-- Left Sidebar -->
-            <div class="grid grid-rows-[25%,75%] max-sm:grid-rows-[50%,50%] bg-gray-800 border-r-4 border-gray-400">
+            <div :class="{'grid-rows-[20%,75%]' : user}" class="grid grid-rows-[25%,75%] max-sm:grid-rows-[50%,50%] bg-gray-800/50 border-r-4 border-gray-400">
                 <div class="border-b-4 border-gray-400">
                     <div class="flex flex-wrap h-full" v-if="!user">
                         <Button class="w-3/4 m-auto" label="Sign in with Google" severity="secondary" icon="pi pi-google" outlined style="background-color: white"/>
@@ -58,8 +58,23 @@ const sendMessage = () => {
                         </Link>
                     </div>
                     <div class="flex h-full w-full" v-else>
-                        <Button class="w-3/4 mt-auto mx-auto mb-2" label="Logout" severity="secondary" icon="pi pi-arrow-left" outlined style="background-color: white"
-                                @click="router.post('/logout')"/>
+                        <div class="grid grid-rows-2 w-full">
+                            <div class="grid grid-cols-2 self-center mx-auto">
+                                <Avatar :label="user.name[0]" class="mr-2" size="xlarge" />
+                                <div class="grid grid-rows-2">
+                                    <div>{{user.name}}</div>
+                                    <div>
+                                        <Link class="underline" href="/profile">
+                                            <button class="border rounded-lg p-0.5 bg-gray-700">Edit Profile</button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex w-full self-center">
+                                <Button class="w-3/4 mx-auto" label="Logout" severity="secondary" icon="pi pi-arrow-left" outlined style="background-color: white"
+                                        @click="router.post('/logout')"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
