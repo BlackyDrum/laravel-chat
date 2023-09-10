@@ -62,7 +62,7 @@ const sendMessage = () => {
                             <div class="grid grid-cols-2 self-center mx-auto">
                                 <Avatar :label="user.name[0]" class="mr-2" size="xlarge" />
                                 <div class="grid grid-rows-2">
-                                    <div>{{user.name}}</div>
+                                    <div class="font-bold">{{user.name}}</div>
                                     <div>
                                         <Link class="underline" href="/profile">
                                             <button class="border rounded-lg p-0.5 bg-gray-700">Edit Profile</button>
