@@ -80,6 +80,7 @@ const sendMessage = () => {
     <Toast />
 
     <Layout>
+        {{messages}}
         <div class="grid grid-cols-[20%,80%] max-2xl:grid-cols-[35%,65%] max-md:grid-cols-[45%,55%] min-h-screen">
             <!-- Left Sidebar -->
             <div :class="{'grid-rows-[20%,75%]' : user}" class="grid grid-rows-[25%,75%] max-sm:grid-rows-[50%,50%] bg-gray-800/50 border-r-4 border-gray-400">
