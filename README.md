@@ -1,8 +1,8 @@
-<img align="left" src="https://github.com/BlackyDrum/simple-chat/assets/111639941/56e2acdc-f67b-4632-b75d-0ebc281793a9" />
+<img align="left" src="https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/ea09295d-bde2-4279-935a-aa920c410854" />
 
 <br />
 
-<img src="https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/b2ee0682-5130-4680-bb05-27bdaa268b47"><br />
+<img src="https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/0d4d9da6-d0ab-47c8-8ee0-90ccbe40a0e7"><br />
 
 **Made with Laravel, Vue and Inertia**
 
