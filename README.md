@@ -1,8 +1,8 @@
-<img align="left" src="https://github.com/BlackyDrum/simple-chat/assets/111639941/56e2acdc-f67b-4632-b75d-0ebc281793a9" />
+<img align="left" src="https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/ea09295d-bde2-4279-935a-aa920c410854" />
 
 <br />
 
-<img src="https://github.com/BlackyDrum/simple-chat/assets/111639941/abab0f82-a2c0-4ae9-a65c-98c11a8078b7"><br />
+<img src="https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/0d4d9da6-d0ab-47c8-8ee0-90ccbe40a0e7"><br />
 
 **Made with Laravel, Vue and Inertia**
 
@@ -28,14 +28,14 @@ Description...
 </ul>
 
 ## Installation
-**Follow these steps to get the simple chat up and running on your local machine:**
+**Follow these steps to get the chatroom up and running on your local machine:**
 1. **Clone the repository:**
 ```
-$ git clone https://github.com/BlackyDrum/simple-chat.git
+$ git clone https://github.com/BlackyDrum/laravel-chatroom.git
 ```
 2. **Navigate to the project directory:**
 ```
-$ cd simple-chat
+$ cd laravel-chatroom
 ```
 3. **Install the dependencies:**
 ```
