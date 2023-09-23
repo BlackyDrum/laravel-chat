@@ -2,7 +2,7 @@
 
 <br />
 
-<img src="https://github.com/BlackyDrum/simple-chat/assets/111639941/abab0f82-a2c0-4ae9-a65c-98c11a8078b7"><br />
+<img src="https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/b2ee0682-5130-4680-bb05-27bdaa268b47"><br />
 
 **Made with Laravel, Vue and Inertia**
 
