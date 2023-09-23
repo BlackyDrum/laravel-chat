@@ -142,7 +142,7 @@ function scrollToBottom() {
                     <div class="m-3 px-6 py-2 bg-gray-400 rounded-lg w-fit max-w-4xl" :class="{'bg-gray-300/90 ml-auto': message.user_id === user.id}" v-for="message in messages">
                         <div class="grid grid-rows-2">
                             <div class="my-auto font-bold text-orange-700" :class="{'ml-auto': message.user_id === user.id}">
-                                {{message.name}}
+                                {{user.admin ? `${message.name} id:${message.user_id}` : message.name}}
                                 <span class="text-gray-600/50">{{formatDate(new Date(message.created_at))}}</span>
                             </div>
                             <div class="font-semibold text-black break-all" :class="{'ml-auto': message.user_id === user.id}">
