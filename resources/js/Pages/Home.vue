@@ -4,10 +4,13 @@ import {onBeforeMount, onBeforeUnmount, onMounted, onUpdated, ref} from "vue";
 
 import Layout from "@/Layouts/Layout.vue";
 
+import { useToast } from 'primevue/usetoast';
+
 import ScrollPanel from 'primevue/scrollpanel';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Avatar from 'primevue/avatar';
+import Toast from 'primevue/toast';
 
 // VUE DIRECTIVES
 onBeforeMount(() => {
@@ -15,6 +18,8 @@ onBeforeMount(() => {
         .listen('MessageSent', (e) => {
             console.log(e);
         });
+
+    window.toast = useToast();
 })
 
 onMounted(() => {
@@ -38,12 +43,28 @@ const user = ref(null);
 
 // METHODS
 const sendMessage = () => {
-    message.value = null;
+    if (!message.value) return;
+
+    window.axios.post('/message',{
+        message: message.value
+    })
+        .then(response => {
+
+        })
+        .catch(error => {
+            console.log(error);
+            window.toast.add({ severity: 'error', summary: 'Error', detail: error.response.data.message, life: 5000 });
+        })
+        .then(() => {
+            message.value = null;
+        })
 }
 </script>
 
 <template>
     <Head title="Home" />
+
+    <Toast />
 
     <Layout>
         <div class="grid grid-cols-[20%,80%] max-2xl:grid-cols-[35%,65%] max-md:grid-cols-[45%,55%] min-h-screen">

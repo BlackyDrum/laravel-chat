@@ -9,6 +9,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import "primevue/resources/themes/lara-light-indigo/theme.css";
 import 'primeicons/primeicons.css';
 import PrimeVue from 'primevue/config';
+import ToastService from 'primevue/toastservice';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -20,6 +21,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue)
+            .use(ToastService)
             .mount(el);
     },
     progress: {
