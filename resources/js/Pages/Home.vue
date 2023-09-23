@@ -48,12 +48,14 @@ const page = usePage();
 
 const message = ref(null);
 const user = ref(null);
+const isSending = ref(false);
 
 
 // METHODS
 const sendMessage = () => {
     if (!message.value) return;
 
+    isSending.value = true;
     window.axios.post('/message',{
         message: message.value
     })
@@ -67,6 +69,7 @@ const sendMessage = () => {
         })
         .then(() => {
             message.value = null;
+            isSending.value = false;
         })
 }
 </script>
@@ -120,7 +123,8 @@ const sendMessage = () => {
                 </ScrollPanel>
                 <div class="flex w-[95%] h-32 mx-auto bg-gray-800 rounded-b-lg">
                     <InputText class="w-[95%] h-14 m-auto bg-gray-800 rounded-lg" placeholder="Type a Message"
-                               v-model="message" @keydown.enter="sendMessage"/>
+                               v-model="message" @keydown.enter="sendMessage"
+                               :disabled="isSending"/>
                 </div>
             </div>
         </div>
