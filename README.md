@@ -28,14 +28,14 @@ Description...
 </ul>
 
 ## Installation
-**Follow these steps to get the simple chat up and running on your local machine:**
+**Follow these steps to get the chatroom up and running on your local machine:**
 1. **Clone the repository:**
 ```
-$ git clone https://github.com/BlackyDrum/simple-chat.git
+$ git clone https://github.com/BlackyDrum/laravel-chatroom.git
 ```
 2. **Navigate to the project directory:**
 ```
-$ cd simple-chat
+$ cd laravel-chatroom
 ```
 3. **Install the dependencies:**
 ```
