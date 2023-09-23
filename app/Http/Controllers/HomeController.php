@@ -18,12 +18,12 @@ class HomeController extends Controller
                 'users.name',
                 'users.id AS user_id',
             ])
-            ->orderBy('messages.created_at')
+            ->orderByDesc('messages.created_at')
             ->limit(50)
             ->get();
 
         return Inertia::render('Home',[
-            'messages' => $messages,
+            'messages' => array_reverse($messages->toArray()),
         ]);
     }
 }

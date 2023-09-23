@@ -11,6 +11,7 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Avatar from 'primevue/avatar';
 import Toast from 'primevue/toast';
+import Card from 'primevue/card';
 
 
 defineProps({
@@ -24,7 +25,7 @@ onBeforeMount(() => {
     Echo.private('chat')
         .listen('MessageSent', (e) => {
             router.reload({
-                only: ['messages']
+                only: ['messages'],
             })
         });
 
@@ -33,6 +34,9 @@ onBeforeMount(() => {
 
 onMounted(() => {
     user.value = page.props.auth.user;
+    setTimeout(() => {
+        scrollToBottom();
+    },10)
 })
 
 onBeforeUnmount(() => {
@@ -41,6 +45,7 @@ onBeforeUnmount(() => {
 
 onUpdated(() => {
     user.value = page.props.auth.user;
+    scrollToBottom();
 })
 
 // VARIABLES
@@ -49,7 +54,7 @@ const page = usePage();
 const message = ref(null);
 const user = ref(null);
 const isSending = ref(false);
-
+const scrollPanel = ref();
 
 // METHODS
 const sendMessage = () => {
@@ -71,6 +76,21 @@ const sendMessage = () => {
             message.value = null;
             isSending.value = false;
         })
+}
+
+const formatDate = date => {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+
+    return `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+}
+
+function scrollToBottom() {
+    scrollPanel.value.scrollTop(Number.MAX_SAFE_INTEGER)
 }
 </script>
 
@@ -118,8 +138,18 @@ const sendMessage = () => {
                 Please Login to access the Chat
             </div>
             <div class="my-auto" v-else>
-                <ScrollPanel class="h-[48rem] w-[95%] self-center mx-auto bg-gray-800 rounded-t-lg">
-
+                <ScrollPanel ref="scrollPanel" class="h-[48rem] w-[95%] self-center mx-auto bg-gray-800 rounded-t-lg">
+                    <div class="m-6 px-6 py-2 bg-gray-400 rounded-lg" v-for="message in messages">
+                        <div class="grid grid-rows-2">
+                            <div class="font-bold text-orange-700">
+                                {{message.name}}
+                                <span class="text-gray-600/50">{{formatDate(new Date(message.created_at))}}</span>
+                            </div>
+                            <div class="font-semibold text-black">
+                                {{message.message}}
+                            </div>
+                        </div>
+                    </div>
                 </ScrollPanel>
                 <div class="flex w-[95%] h-32 mx-auto bg-gray-800 rounded-b-lg">
                     <InputText class="w-[95%] h-14 m-auto bg-gray-800 rounded-lg" placeholder="Type a Message"
