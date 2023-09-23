@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -9,6 +10,19 @@ class HomeController extends Controller
 {
     public function show()
     {
-        return Inertia::render('Home');
+        $messages = Message::query()
+            ->join('users', 'users.id', '=', 'messages.creator_id')
+            ->select([
+                'messages.message',
+                'messages.created_at',
+                'users.name'
+            ])
+            ->orderBy('messages.created_at')
+            ->limit(50)
+            ->get();
+
+        return Inertia::render('Home',[
+            'messages' => $messages,
+        ]);
     }
 }

@@ -12,11 +12,20 @@ import Button from 'primevue/button';
 import Avatar from 'primevue/avatar';
 import Toast from 'primevue/toast';
 
+
+defineProps({
+    messages : {
+        type: Array
+    }
+})
+
 // VUE DIRECTIVES
 onBeforeMount(() => {
     Echo.private('chat')
         .listen('MessageSent', (e) => {
-            console.log(e);
+            router.reload({
+                only: ['messages']
+            })
         });
 
     window.toast = useToast();
@@ -49,10 +58,11 @@ const sendMessage = () => {
         message: message.value
     })
         .then(response => {
-
+            router.reload({
+                only: ['messages']
+            })
         })
         .catch(error => {
-            console.log(error);
             window.toast.add({ severity: 'error', summary: 'Error', detail: error.response.data.message, life: 5000 });
         })
         .then(() => {
