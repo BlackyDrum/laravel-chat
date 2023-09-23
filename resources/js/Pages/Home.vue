@@ -80,7 +80,6 @@ const sendMessage = () => {
     <Toast />
 
     <Layout>
-        {{messages}}
         <div class="grid grid-cols-[20%,80%] max-2xl:grid-cols-[35%,65%] max-md:grid-cols-[45%,55%] min-h-screen">
             <!-- Left Sidebar -->
             <div :class="{'grid-rows-[20%,75%]' : user}" class="grid grid-rows-[25%,75%] max-sm:grid-rows-[50%,50%] bg-gray-800/50 border-r-4 border-gray-400">
@@ -100,7 +99,7 @@ const sendMessage = () => {
                                     <div class="font-bold">{{user.name}}</div>
                                     <div>
                                         <Link class="underline" href="/profile">
-                                            <button class="border rounded-lg p-0.5 bg-gray-700">Edit Profile</button>
+                                            <button class="border rounded-lg p-1 transition-all bg-gray-700 hover:bg-gray-500">Edit Profile</button>
                                         </Link>
                                     </div>
                                 </div>
