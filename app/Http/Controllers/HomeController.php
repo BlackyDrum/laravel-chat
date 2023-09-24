@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -24,7 +25,7 @@ class HomeController extends Controller
             ->get();
 
         return Inertia::render('Home',[
-            'messages' => array_reverse($messages->toArray()),
+            'messages' => Auth::check() ? array_reverse($messages->toArray()) : [],
         ]);
     }
 }
