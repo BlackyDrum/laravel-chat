@@ -45,6 +45,7 @@ onBeforeUnmount(() => {
 
 onUpdated(() => {
     user.value = page.props.auth.user;
+    inputText.value.$el.focus()
     scrollToBottom();
 })
 
@@ -55,6 +56,7 @@ const message = ref(null);
 const user = ref(null);
 const isSending = ref(false);
 const scrollPanel = ref();
+const inputText = ref();
 
 // METHODS
 const sendMessage = () => {
@@ -65,9 +67,7 @@ const sendMessage = () => {
         message: message.value
     })
         .then(response => {
-            router.reload({
-                only: ['messages']
-            })
+            console.log(`[${formatDate(new Date())}] Message sent`);
         })
         .catch(error => {
             window.toast.add({ severity: 'error', summary: 'Error', detail: error.response.data.message, life: 5000 });
@@ -152,8 +152,8 @@ function scrollToBottom() {
                     </div>
                 </ScrollPanel>
                 <div class="flex w-[95%] h-32 mx-auto bg-gray-800 rounded-b-lg">
-                    <InputText class="w-[95%] h-14 m-auto bg-gray-800 rounded-lg" placeholder="Type a Message"
-                               v-model="message" @keydown.enter="sendMessage"
+                    <InputText ref="inputText" class="w-[95%] h-14 m-auto bg-gray-800 rounded-lg" placeholder="Type a Message"
+                               v-model="message" @keydown.enter="sendMessage" autofocus
                                :disabled="isSending"/>
                 </div>
             </div>
