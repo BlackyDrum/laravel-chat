@@ -67,7 +67,6 @@ const sendMessage = () => {
         message: message.value
     })
         .then(response => {
-            // Message successfully sent
         })
         .catch(error => {
             window.toast.add({ severity: 'error', summary: 'Error', detail: error.response.data.message, life: 5000 });
