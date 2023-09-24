@@ -67,7 +67,7 @@ const sendMessage = () => {
         message: message.value
     })
         .then(response => {
-            console.log(`[${formatDate(new Date())}] Message sent`);
+            // Message successfully sent
         })
         .catch(error => {
             window.toast.add({ severity: 'error', summary: 'Error', detail: error.response.data.message, life: 5000 });
