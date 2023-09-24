@@ -30,6 +30,8 @@ class MessageController extends Controller
             $command = $parts[0];
             $parameter = $parts[1];
 
+            $message = "";
+
             switch ($command)
             {
                 case '/ban':
@@ -38,6 +40,7 @@ class MessageController extends Controller
                         User::query()->findOrFail((int)$parameter)->update([
                             'banned' => true,
                         ]);
+                        $message = "User with ID {$parameter} successfully banned";
                     }
                     catch (ModelNotFoundException $exception)
                     {
@@ -50,6 +53,7 @@ class MessageController extends Controller
                         User::query()->findOrFail((int)$parameter)->update([
                             'banned' => false,
                         ]);
+                        $message = "User with ID {$parameter} successfully unbanned";
                     }
                     catch (ModelNotFoundException $exception)
                     {
@@ -60,7 +64,7 @@ class MessageController extends Controller
                     abort(404, "Unknown command");
             }
 
-            return to_route('home');
+            return response()->json(['message' => $message]);
         }
         else if ($request->input('message')[0] == '/' && !Auth::user()->admin)
         {
