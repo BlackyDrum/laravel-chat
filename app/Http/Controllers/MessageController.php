@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
-use function Laravel\Prompts\error;
-use const http\Client\Curl\AUTH_ANY;
 
 class MessageController extends Controller
 {
@@ -37,7 +35,9 @@ class MessageController extends Controller
                 case '/ban':
                     try
                     {
-                        User::query()->findOrFail((int)$parameter)->delete();
+                        User::query()->findOrFail((int)$parameter)->update([
+                            'banned' => true,
+                        ]);
                     }
                     catch (ModelNotFoundException $exception)
                     {

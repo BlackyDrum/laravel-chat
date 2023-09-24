@@ -7,6 +7,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import SecondaryButton from "@/Components/SecondaryButton.vue";
+import {ref} from "vue";
 
 defineProps({
     canResetPassword: {
@@ -26,8 +27,11 @@ const form = useForm({
 const submit = () => {
     form.post(route('login'), {
         onFinish: () => form.reset('password'),
+        onError: (error) => banMsg.value = error.message
     });
 };
+
+const banMsg = ref(null);
 </script>
 
 <template>
@@ -76,6 +80,8 @@ const submit = () => {
                     <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
                 </label>
             </div>
+
+            <InputError class="mt-2" :message="banMsg" />
 
             <div class="flex items-center justify-end mt-4">
                 <Link

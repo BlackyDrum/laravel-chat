@@ -12,6 +12,7 @@ class HomeController extends Controller
     {
         $messages = Message::query()
             ->join('users', 'users.id', '=', 'messages.creator_id')
+            ->where('users.banned', '=', 'false')
             ->select([
                 'messages.message',
                 'messages.created_at',
