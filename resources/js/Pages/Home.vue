@@ -67,7 +67,7 @@ const sendMessage = () => {
         message: message.value
     })
         .then(response => {
-            if (user.value.admin) {
+            if (user.value.admin && response.data.message) {
                 window.toast.add({ severity: 'success', summary: 'Success', detail: response.data.message, life: 5000 });
             }
         })
