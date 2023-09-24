@@ -44,6 +44,18 @@ class MessageController extends Controller
                         abort(404, "User not found");
                     }
                     break;
+                case '/unban':
+                    try
+                    {
+                        User::query()->findOrFail((int)$parameter)->update([
+                            'banned' => false,
+                        ]);
+                    }
+                    catch (ModelNotFoundException $exception)
+                    {
+                        abort(404, "User not found");
+                    }
+                    break;
                 default:
                     abort(404, "Unknown command");
             }
