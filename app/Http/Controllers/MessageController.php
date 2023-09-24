@@ -66,10 +66,6 @@ class MessageController extends Controller
 
             return response()->json(['message' => $message]);
         }
-        else if ($request->input('message')[0] == '/' && !Auth::user()->admin)
-        {
-            abort(403, "Forbidden");
-        }
 
         $execute = RateLimiter::attempt(
             'send-message'.Auth::id(),
