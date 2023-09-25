@@ -109,7 +109,9 @@ function scrollToBottom() {
                 <div class="border-b-4 border-gray-400">
                     <div class="flex flex-wrap h-full" v-if="!user">
                         <Button class="w-3/4 m-auto" label="Sign in with Google" severity="secondary" icon="pi pi-google" outlined style="background-color: white"/>
-                        <Button class="w-3/4 m-auto" label="Sign in with Github" severity="secondary" icon="pi pi-github" outlined style="background-color: white"/>
+                        <a class="m-auto" href="/auth/github/verify">
+                            <Button label="Sign in with Github" severity="secondary" icon="pi pi-github" outlined style="background-color: white"/>
+                        </a>
                         <Link class="flex w-full" href="/login">
                             <Button class="w-3/4 m-auto" label="Alt Login" severity="secondary" icon="pi pi-user" outlined style="background-color: white"/>
                         </Link>

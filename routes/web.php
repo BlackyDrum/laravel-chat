@@ -20,6 +20,11 @@ use Inertia\Inertia;
 Route::middleware(\App\Http\Middleware\CheckUserBan::class)->group(function() {
     Route::get('/', [HomeController::class, 'show'])->name('home');
 
+    Route::get('/auth/github/verify', function() {
+        return \Laravel\Socialite\Facades\Socialite::driver('github')->redirect();
+    });
+    Route::get('/auth/github/callback', [\App\Http\Controllers\SocialiteController::class, 'github']);
+
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
