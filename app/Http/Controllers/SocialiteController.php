@@ -17,7 +17,7 @@ class SocialiteController extends Controller
         $user = User::query()->updateOrCreate([
             'email' => $githubUser->email,
         ],[
-            'name' => $githubUser->nickname,
+            'name' => $githubUser->nickname ? $githubUser->name : "Unknown",
             'password' => Hash::make(Str::random()),
         ]);
 
