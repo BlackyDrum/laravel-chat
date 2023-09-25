@@ -35,7 +35,8 @@ onBeforeMount(() => {
 onMounted(() => {
     user.value = page.props.auth.user;
     setTimeout(() => {
-        scrollToBottom();
+        if (user.value)
+            scrollToBottom();
     },10)
 })
 
