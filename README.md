@@ -15,11 +15,6 @@
 <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white"> <img src="https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D"> <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"> <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white">
 
 
-
-<p>
-Description...
-</p>
-
 ## Requirements
 <ul>
     <li>PHP: ^8.1</li>
@@ -70,4 +65,25 @@ $ php artisan serve
 $ php artisan websockets:serve
 ```
 11. **Visit http://localhost:8000 in your web browser to access the application.**
+
+## OAuth Authentication
+To enable login with Google or GitHub, you need to create OAuth apps on their respective platforms and set the client ID, client secret and client callback in the ``.env`` file.
+
+
+## Admin commands
+Admins can execute the following commands in the chatroom
+<table>
+    <thead>
+        <td>Command</td>
+        <td>Description</td>
+    </thead>
+    <tr>
+        <td>/ban {id}</td>
+        <td>Bans a user with the specified ID</td>
+    </tr>
+        <tr>
+        <td>/unban {id}</td>
+        <td>Unbans a user with the specified ID</td>
+    </tr>
+</table>
 
