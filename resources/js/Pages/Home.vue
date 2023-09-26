@@ -103,10 +103,10 @@ function scrollToBottom() {
     <Toast />
 
     <Layout>
-        <div class="grid grid-cols-[20%,80%] max-2xl:grid-cols-[35%,65%] max-md:grid-cols-[45%,55%] min-h-screen">
+        <div class="grid grid-cols-[20%,80%] max-sm:gap-4 max-2xl:grid-cols-[35%,65%] max-sm:grid-cols-[100%] min-h-screen">
             <!-- Left Sidebar -->
-            <div :class="{'grid-rows-[20%,75%]' : user}" class="grid grid-rows-[25%,75%] max-sm:grid-rows-[50%,50%] bg-gray-800/50 border-r-4 border-gray-400">
-                <div class="border-b-4 border-gray-400">
+            <div :class="{'grid-rows-[20%,75%]' : user}" class="grid grid-rows-[25%,75%] max-sm:grid-rows-[100%] bg-gray-800/50 sm:border-r-4 border-gray-400">
+                <div class="sm:border-b-4 border-gray-400">
                     <div class="flex flex-wrap h-full" v-if="!user">
                         <a class="m-auto" href="/auth/google/verify">
                             <Button label="Sign in with Google" severity="secondary" icon="pi pi-google" outlined style="background-color: white"/>
@@ -141,7 +141,7 @@ function scrollToBottom() {
             </div>
 
             <!-- Chat -->
-            <div class="m-auto text-center" v-if="!user">
+            <div class="m-auto text-center max-sm:hidden" v-if="!user">
                 Please Login to access the Chat
             </div>
             <div class="my-auto" v-else>
