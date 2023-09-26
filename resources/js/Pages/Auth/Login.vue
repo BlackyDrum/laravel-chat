@@ -5,9 +5,9 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import {Head, Link, useForm, usePage} from '@inertiajs/vue3';
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 
 defineProps({
     canResetPassword: {
@@ -16,7 +16,16 @@ defineProps({
     status: {
         type: String,
     },
+    errors: {
+
+    }
 });
+
+onMounted(() => {
+    if (page.props.errors.message) {
+        banMsg.value = page.props.errors.message;
+    }
+})
 
 const form = useForm({
     email: '',
@@ -30,6 +39,8 @@ const submit = () => {
         onError: (error) => banMsg.value = error.message
     });
 };
+
+const page = usePage();
 
 const banMsg = ref(null);
 </script>
