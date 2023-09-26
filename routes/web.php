@@ -25,6 +25,11 @@ Route::middleware(\App\Http\Middleware\CheckUserBan::class)->group(function() {
     });
     Route::get('/auth/github/callback', [\App\Http\Controllers\SocialiteController::class, 'github']);
 
+    Route::get('/auth/google/verify', function() {
+        return \Laravel\Socialite\Facades\Socialite::driver('google')->redirect();
+    });
+    Route::get('/auth/google/callback', [\App\Http\Controllers\SocialiteController::class, 'google']);
+
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

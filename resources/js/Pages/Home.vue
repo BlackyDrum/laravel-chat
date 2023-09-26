@@ -108,7 +108,9 @@ function scrollToBottom() {
             <div :class="{'grid-rows-[20%,75%]' : user}" class="grid grid-rows-[25%,75%] max-sm:grid-rows-[50%,50%] bg-gray-800/50 border-r-4 border-gray-400">
                 <div class="border-b-4 border-gray-400">
                     <div class="flex flex-wrap h-full" v-if="!user">
-                        <Button class="w-3/4 m-auto" label="Sign in with Google" severity="secondary" icon="pi pi-google" outlined style="background-color: white"/>
+                        <a class="m-auto" href="/auth/google/verify">
+                            <Button label="Sign in with Google" severity="secondary" icon="pi pi-google" outlined style="background-color: white"/>
+                        </a>
                         <a class="m-auto" href="/auth/github/verify">
                             <Button label="Sign in with Github" severity="secondary" icon="pi pi-github" outlined style="background-color: white"/>
                         </a>
@@ -143,7 +145,7 @@ function scrollToBottom() {
                 Please Login to access the Chat
             </div>
             <div class="my-auto" v-else>
-                <ScrollPanel ref="scrollPanel" class="h-[48rem] w-[95%] self-center mx-auto bg-gray-800 rounded-t-lg">
+                <ScrollPanel ref="scrollPanel" class="h-[40rem] w-[95%] self-center mx-auto bg-gray-800 rounded-t-lg">
                     <div class="m-3 px-6 py-2 bg-gray-400 rounded-lg w-fit max-w-4xl" :class="{'bg-gray-300/90 ml-auto': message.user_id === user.id}" v-for="message in messages">
                         <div class="grid grid-rows-2">
                             <div class="my-auto font-bold text-orange-700" :class="{'ml-auto': message.user_id === user.id}">
