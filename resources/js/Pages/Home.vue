@@ -147,13 +147,21 @@ function scrollToBottom() {
             </div>
             <div class="my-auto" v-else>
                 <ScrollPanel ref="scrollPanel" class="h-[40rem] w-[95%] self-center mx-auto bg-gray-800 rounded-t-lg">
-                    <div class="m-3 px-6 py-2 bg-gray-400 rounded-lg w-fit max-w-4xl" :class="{'bg-gray-300/90 ml-auto': message.user_id === user.id}" v-for="message in messages">
-                        <div class="grid grid-rows-2">
+                    <div class="m-3 px-6 py-2 bg-gray-400 rounded-lg w-fit max-w-4xl" :class="{'bg-gray-300/90 sm:ml-auto': message.user_id === user.id}" v-for="message in messages">
+                        <div class="flex-1">
                             <div class="my-auto font-bold text-orange-700" :class="{'ml-auto': message.user_id === user.id}">
-                                {{user.admin ? `${message.name} id:${message.user_id}` : message.name}}
-                                <span class="text-gray-600/50">{{formatDate(new Date(message.created_at))}}</span>
+                                <div class="flex">
+                                    <div class="ml-auto mr-2">
+                                        <Avatar v-if="message.user_avatar" :image="message.user_avatar" size="large" shape="circle" />
+                                        <Avatar v-else :label="message.name[0]" size="large" shape="circle" />
+                                    </div>
+                                    <div class="self-center">
+                                        {{user.admin ? `${message.name} id:${message.user_id}` : message.name}}
+                                        <span class="text-gray-600/50">{{formatDate(new Date(message.created_at))}}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="font-semibold text-black break-all" :class="{'ml-auto': message.user_id === user.id}">
+                            <div class="font-semibold text-black break-all my-auto" :class="{'ml-auto': message.user_id === user.id}">
                                 {{message.message}}
                             </div>
                         </div>

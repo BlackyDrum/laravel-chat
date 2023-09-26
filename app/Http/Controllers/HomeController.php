@@ -19,6 +19,7 @@ class HomeController extends Controller
                 'messages.created_at',
                 'users.name',
                 'users.id AS user_id',
+                'users.avatar AS user_avatar',
             ])
             ->orderByDesc('messages.created_at')
             ->limit(50)
