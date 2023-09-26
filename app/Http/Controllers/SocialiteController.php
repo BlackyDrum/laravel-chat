@@ -19,6 +19,7 @@ class SocialiteController extends Controller
         ],[
             'name' => $githubUser->nickname ?: $githubUser->name,
             'password' => Hash::make(Str::random()),
+            'avatar' => $githubUser->avatar,
         ]);
 
         Auth::login($user);
@@ -34,6 +35,7 @@ class SocialiteController extends Controller
         ],[
             'name' => $googleUser->nickname ?: $googleUser->name,
             'password' => Hash::make(Str::random()),
+            'avatar' => $googleUser->avatar,
         ]);
 
         Auth::login($user);

@@ -121,7 +121,8 @@ function scrollToBottom() {
                     <div class="flex h-full w-full" v-else>
                         <div class="grid grid-rows-2 w-full">
                             <div class="grid grid-cols-2 self-center mx-auto">
-                                <Avatar :label="user.name[0]" class="mr-2" size="xlarge" />
+                                <Avatar v-if="user.avatar" :image="user.avatar" class="mr-2" size="xlarge" />
+                                <Avatar v-else :label="user.name[0]" class="mr-2" size="xlarge" />
                                 <div class="grid grid-rows-2">
                                     <div class="font-bold">{{user.name}}</div>
                                     <div>
