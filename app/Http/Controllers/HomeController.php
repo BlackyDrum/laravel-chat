@@ -32,7 +32,7 @@ class HomeController extends Controller
             ->orderByDesc('messages.created_at')
             ->limit(50);
 
-        if (!empty($request->input('id')))
+        if (!empty($request->input('id')) && Auth::check())
         {
             $room = Room::query()->findOrFail($request->input('id'));
             $userInRoom = User::query()->where('room_id', '=', $request->input('id'))->count();

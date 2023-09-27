@@ -301,6 +301,9 @@ function scrollToBottom() {
                     </div>
                 </div>
             </div>
+            <div class="text-red-600 font-semibold mt-2" v-if="errors.max_rooms">
+                {{errors.max_rooms}}
+            </div>
             <div class="mt-4">
                 <div class="grid grid-cols-2 my-4">
                     <div class="justify-center">

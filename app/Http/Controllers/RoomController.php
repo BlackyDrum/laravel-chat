@@ -17,6 +17,14 @@ class RoomController extends Controller
             'description' => 'nullable|string|max:1024'
         ]);
 
+        if (!Auth::user()->admin)
+        {
+            if (Room::query()->where('creator_id', '=', Auth::id())->count() >= 1)
+            {
+                return back()->withErrors(['max_rooms' => "You can only have 1 room. Please delete your active room before creating another one."]);
+            }
+        }
+
         Room::query()->create([
             'name' => $request->input('name'),
             'count' => $request->input('count'),
