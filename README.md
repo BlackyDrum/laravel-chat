@@ -14,7 +14,8 @@
 
 <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white"> <img src="https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D"> <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"> <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white">
 
-![example-chat](https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/0a314005-1f12-4e52-ab2a-aa33818c62f9)
+
+![example-chat-2](https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/579b7cf0-1cda-496b-aaab-591caa859f7b)
 
 
 
