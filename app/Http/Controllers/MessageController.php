@@ -88,4 +88,13 @@ class MessageController extends Controller
 
         return to_route('home');
     }
+
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'id' => 'bail|required|integer|exists:messages,id'
+        ]);
+
+        Message::query()->find($request->input('id'))->delete();
+    }
 }

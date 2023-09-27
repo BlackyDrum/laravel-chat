@@ -36,6 +36,8 @@ Route::middleware(\App\Http\Middleware\CheckUserBan::class)->group(function() {
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         Route::post('/message', [\App\Http\Controllers\MessageController::class, 'create']);
+        Route::delete('/message', [\App\Http\Controllers\MessageController::class, 'delete'])
+            ->middleware(\App\Http\Middleware\CheckAdminPrivilege::class);
     });
 
     require __DIR__.'/auth.php';

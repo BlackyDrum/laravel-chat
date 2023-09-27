@@ -15,6 +15,7 @@ class HomeController extends Controller
             ->join('users', 'users.id', '=', 'messages.creator_id')
             ->where('users.banned', '=', 'false')
             ->select([
+                'messages.id',
                 'messages.message',
                 'messages.created_at',
                 'users.name',
