@@ -146,7 +146,7 @@ const deleteRoom = id => {
             router.reload({
                 only: ['rooms']
             })
-            window.toast.add({ severity: 'success', summary: 'Success', detail: "Chatroom deleted", life: 5000 });
+            router.get('/');
         })
         .catch(error => {
             window.toast.add({ severity: 'error', summary: 'Error', detail: error.response.data.message, life: 5000 });
