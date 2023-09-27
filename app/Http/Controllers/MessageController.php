@@ -15,6 +15,9 @@ class MessageController extends Controller
 {
     public function create(Request $request)
     {
+        if (Auth::user()->muted)
+            abort(403, "Muted");
+
         $request->validate([
             'message' => 'required|string|max:512',
         ]);
@@ -54,6 +57,32 @@ class MessageController extends Controller
                             'banned' => false,
                         ]);
                         $message = "User with ID {$parameter} successfully unbanned";
+                    }
+                    catch (ModelNotFoundException $exception)
+                    {
+                        abort(404, "User not found");
+                    }
+                    break;
+                case '/mute':
+                    try
+                    {
+                        User::query()->findOrFail((int)$parameter)->update([
+                            'muted' => true,
+                        ]);
+                        $message = "User with ID {$parameter} successfully muted";
+                    }
+                    catch (ModelNotFoundException $exception)
+                    {
+                        abort(404, "User not found");
+                    }
+                    break;
+                case '/unmute':
+                    try
+                    {
+                        User::query()->findOrFail((int)$parameter)->update([
+                            'muted' => false,
+                        ]);
+                        $message = "User with ID {$parameter} successfully unmuted";
                     }
                     catch (ModelNotFoundException $exception)
                     {

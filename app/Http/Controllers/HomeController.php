@@ -19,6 +19,7 @@ class HomeController extends Controller
                 'messages.message',
                 'messages.created_at',
                 'users.name',
+                'users.muted',
                 'users.id AS user_id',
                 'users.avatar AS user_avatar',
             ])

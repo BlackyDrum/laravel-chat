@@ -61,7 +61,7 @@ const inputText = ref();
 
 // METHODS
 const sendMessage = () => {
-    if (!message.value) return;
+    if (!message.value || user.value.muted) return;
 
     isSending.value = true;
     window.axios.post('/message',{
@@ -192,9 +192,9 @@ function scrollToBottom() {
                     </div>
                 </ScrollPanel>
                 <div class="flex w-[95%] h-32 mx-auto bg-gray-800 rounded-b-lg">
-                    <InputText ref="inputText" class="w-[95%] h-14 m-auto bg-gray-800 rounded-lg" placeholder="Type a Message"
+                    <InputText ref="inputText" class="w-[95%] h-14 m-auto bg-gray-800 rounded-lg" :placeholder="user.muted ? 'You have been muted' : 'Type a Message'"
                                v-model="message" @keydown.enter="sendMessage" autofocus
-                               :disabled="isSending"/>
+                               :disabled="isSending || user.muted"/>
                 </div>
             </div>
         </div>
