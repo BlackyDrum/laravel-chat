@@ -38,6 +38,9 @@ Route::middleware(\App\Http\Middleware\CheckUserBan::class)->group(function() {
         Route::post('/message', [\App\Http\Controllers\MessageController::class, 'create']);
         Route::delete('/message', [\App\Http\Controllers\MessageController::class, 'delete'])
             ->middleware(\App\Http\Middleware\CheckAdminPrivilege::class);
+
+        Route::post('/room', [\App\Http\Controllers\RoomController::class, 'create']);
+        Route::delete('/room', [\App\Http\Controllers\RoomController::class, 'delete']);
     });
 
     require __DIR__.'/auth.php';
