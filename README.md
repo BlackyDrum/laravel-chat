@@ -84,9 +84,17 @@ Admins can execute the following commands in the chatroom
         <td>/ban {id}</td>
         <td>Bans a user with the specified ID</td>
     </tr>
-        <tr>
+    <tr>
         <td>/unban {id}</td>
         <td>Unbans a user with the specified ID</td>
+    </tr>
+    <tr>
+        <td>/mute {id}</td>
+        <td>Mutes a user with the specified ID</td>
+    </tr>
+    <tr>
+        <td>/unmute {id}</td>
+        <td>Unmutes a user with the specified ID</td>
     </tr>
 </table>
 
