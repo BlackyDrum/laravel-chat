@@ -225,7 +225,7 @@ function scrollToBottom() {
                     <div class="text-center mt-4">
                         Current Rooms: {{rooms.length}}
                     </div>
-                    <ScrollPanel  style="width: 100%; height: 35rem">
+                    <ScrollPanel  style="width: 100%; height: 33rem">
                         <div class="mt-4 w-3/4 mx-auto">
                             <Card class="mt-2" v-for="room in rooms" :key="room.id">
                                 <template #title> {{room.name}} ({{userInRooms[room.id] || 0}}/{{room.count}}) </template>
