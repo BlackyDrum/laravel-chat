@@ -12,7 +12,7 @@ class RoomController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:32',
+            'name' => 'required|string|max:32|unique:rooms,name',
             'count' => 'required|integer|min:1|max:10',
             'description' => 'nullable|string|max:1024'
         ]);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\MessageSent;
 use App\Models\Message;
+use App\Models\Room;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -24,6 +25,10 @@ class MessageController extends Controller
         ],[
             'room_id.*' => "Please join or create a room"
         ]);
+
+        $room = Room::query()->find($request->input('room_id'));
+        if (Auth::user()->room_id != $room->id)
+            abort(403, "Forbidden");
 
         if ($request->input('message')[0] == '/' && Auth::user()->admin)
         {
