@@ -222,7 +222,10 @@ function scrollToBottom() {
                         <Button icon="pi pi-inbox" class="mx-auto mt-6" severity="warning" label="Create new Room"
                                 @click="createRoomDialogVisible = true"/>
                     </div>
-                    <ScrollPanel class="mt-4" style="width: 100%; height: 35rem">
+                    <div class="text-center mt-4">
+                        Current Rooms: {{rooms.length}}
+                    </div>
+                    <ScrollPanel  style="width: 100%; height: 35rem">
                         <div class="mt-4 w-3/4 mx-auto">
                             <Card class="mt-2" v-for="room in rooms" :key="room.id">
                                 <template #title> {{room.name}} ({{userInRooms[room.id] || 0}}/{{room.count}}) </template>
@@ -296,12 +299,6 @@ function scrollToBottom() {
                     <div class="text-red-600 font-semibold" v-if="errors.count">
                         {{errors.count}}
                     </div>
-                </div>
-            </div>
-            <div class="mt-4">
-                <Textarea class="w-full" v-model="createRoomForm.description" :disabled="createRoomForm.processing" placeholder="Description (optional)"></Textarea>
-                <div class="text-red-600 font-semibold" v-if="errors.description">
-                    {{errors.description}}
                 </div>
             </div>
             <div class="mt-4">
