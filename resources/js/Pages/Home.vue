@@ -37,7 +37,7 @@ defineProps({
 
 // VUE DIRECTIVES
 onBeforeMount(() => {
-    Echo.private('chat')
+    Echo.private(`chat.${(new URLSearchParams(window.location.search)).get('id')}`)
         .listen('MessageSent', (e) => {
             router.reload()
         });
@@ -54,7 +54,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-    Echo.leave('chat');
+    Echo.leave(`chat.${(new URLSearchParams(window.location.search)).get('id')}`);
 })
 
 onUpdated(() => {
@@ -154,6 +154,7 @@ const deleteRoom = id => {
 }
 
 const joinRoom = (id) => {
+    Echo.leave(`chat.${(new URLSearchParams(window.location.search)).get('id')}`);
     router.get('/',{
         id: id,
     })

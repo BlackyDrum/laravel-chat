@@ -10,6 +10,7 @@ use App\Models\UserInRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use const http\Client\Curl\AUTH_ANY;
 
 class HomeController extends Controller
 {
@@ -37,7 +38,7 @@ class HomeController extends Controller
             $room = Room::query()->findOrFail($request->input('id'));
             $userInRoom = User::query()->where('room_id', '=', $request->input('id'))->count();
 
-            if ($room->count > $userInRoom)
+            if ($room->count > $userInRoom || Auth::user()->admin)
             {
                 User::query()->find(Auth::id())->update([
                     'room_id' => $request->input('id')

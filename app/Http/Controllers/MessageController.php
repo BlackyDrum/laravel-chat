@@ -109,7 +109,7 @@ class MessageController extends Controller
                     'room_id' => $request->input('room_id'),
                 ]);
 
-                event(new MessageSent());
+                event(new MessageSent($request->input('room_id')));
             },
             10
         );
