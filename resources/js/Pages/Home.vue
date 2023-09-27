@@ -1,22 +1,37 @@
 <script setup>
-import {Head, Link, router, usePage} from '@inertiajs/vue3';
-import {onBeforeMount, onBeforeUnmount, onMounted, onUpdated, ref} from "vue";
+import {Head, Link, router, useForm, usePage} from '@inertiajs/vue3';
+import {computed, onBeforeMount, onBeforeUnmount, onMounted, onUpdated, ref} from "vue";
 
 import Layout from "@/Layouts/Layout.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 import { useToast } from 'primevue/usetoast';
 
 import ScrollPanel from 'primevue/scrollpanel';
 import InputText from 'primevue/inputtext';
+import InputNumber from 'primevue/inputnumber';
 import Button from 'primevue/button';
 import Avatar from 'primevue/avatar';
 import Toast from 'primevue/toast';
+import Dialog from 'primevue/dialog';
+import Textarea from 'primevue/textarea';
+import ProgressSpinner from 'primevue/progressspinner';
 import Card from 'primevue/card';
 
 
 defineProps({
     messages : {
         type: Array
+    },
+    rooms: {
+        type: Array
+    },
+    userInRooms: {
+        type: Array
+    },
+    errors: {
+
     }
 })
 
@@ -24,9 +39,7 @@ defineProps({
 onBeforeMount(() => {
     Echo.private('chat')
         .listen('MessageSent', (e) => {
-            router.reload({
-                only: ['messages'],
-            })
+            router.reload()
         });
 
     window.toast = useToast();
@@ -58,6 +71,13 @@ const user = ref(null);
 const isSending = ref(false);
 const scrollPanel = ref();
 const inputText = ref();
+const createRoomDialogVisible = ref(false);
+
+const createRoomForm = useForm({
+    name: null,
+    count: 1,
+    description: null,
+})
 
 // METHODS
 const sendMessage = () => {
@@ -65,7 +85,8 @@ const sendMessage = () => {
 
     isSending.value = true;
     window.axios.post('/message',{
-        message: message.value
+        message: message.value,
+        room_id: (new URLSearchParams(window.location.search)).get('id')
     })
         .then(response => {
             if (user.value.admin && response.data.message) {
@@ -98,6 +119,44 @@ const deleteMessage = (id) => {
             window.toast.add({ severity: 'error', summary: 'Error', detail: error.response.data.message, life: 5000 });
         })
 
+}
+
+const createRoom = () => {
+    createRoomForm.post('/room', {
+        onSuccess: () => {
+            window.toast.add({ severity: 'success', summary: 'Success', detail: "New Chatroom created", life: 5000 });
+            createRoomDialogVisible.value = false;
+            createRoomForm.name = null;
+            createRoomForm.count = 1;
+            createRoomForm.description = null;
+        },
+        onFinish: () => {
+
+        }
+    })
+}
+
+const deleteRoom = id => {
+    window.axios.delete('room',{
+        data: {
+            id: id,
+        }
+    })
+        .then(response => {
+            router.reload({
+                only: ['rooms']
+            })
+            router.get('/');
+        })
+        .catch(error => {
+            window.toast.add({ severity: 'error', summary: 'Error', detail: error.response.data.message, life: 5000 });
+        })
+}
+
+const joinRoom = (id) => {
+    router.get('/',{
+        id: id,
+    })
 }
 
 const formatDate = date => {
@@ -158,6 +217,26 @@ function scrollToBottom() {
                         </div>
                     </div>
                 </div>
+                <div v-if="user">
+                    <div class="flex">
+                        <Button icon="pi pi-inbox" class="mx-auto mt-6" severity="warning" label="Create new Room"
+                                @click="createRoomDialogVisible = true"/>
+                    </div>
+                    <div class="text-center mt-4">
+                        Current Rooms: {{rooms.length}}
+                    </div>
+                    <ScrollPanel  style="width: 100%; height: 33rem">
+                        <div class="mt-4 w-3/4 mx-auto">
+                            <Card class="mt-2" v-for="room in rooms" :key="room.id">
+                                <template #title> {{room.name}} ({{userInRooms[room.id] || 0}}/{{room.count}}) </template>
+                                <template #content>
+                                    <Button class="w-full" @click="joinRoom(room.id)" icon="pi pi-arrow-right" label="Join Room"></Button>
+                                    <Button class="w-full mt-1" @click="deleteRoom(room.id)" v-if="room.creator_id === user.id || user.admin" icon="pi pi-trash" severity="danger" label="Delete Room"></Button>
+                                </template>
+                            </Card>
+                        </div>
+                    </ScrollPanel>
+                </div>
             </div>
 
             <!-- Chat -->
@@ -199,6 +278,50 @@ function scrollToBottom() {
             </div>
         </div>
     </Layout>
+
+    <Dialog v-model:visible="createRoomDialogVisible" :closable="false" :draggable="false" modal header="Create new Room" class="max-md:w-[90%]">
+        <div class="mt-5">
+            <div class="grid grid-cols-2 max-lg:grid-cols-1 gap-6">
+                <div>
+                    <span class="p-float-label">
+                        <InputText v-model="createRoomForm.name" :disabled="createRoomForm.processing" class="w-full" />
+                        <label>Name of the Room</label>
+                    </span>
+                    <div class="text-red-600 font-semibold" v-if="errors.name">
+                        {{errors.name}}
+                    </div>
+                </div>
+                <div>
+                    <span class="p-float-label">
+                        <InputNumber v-model="createRoomForm.count" :disabled="createRoomForm.processing" class="w-full" />
+                        <label>Max. Participants</label>
+                    </span>
+                    <div class="text-red-600 font-semibold" v-if="errors.count">
+                        {{errors.count}}
+                    </div>
+                </div>
+            </div>
+            <div class="text-red-600 font-semibold mt-2" v-if="errors.max_rooms">
+                {{errors.max_rooms}}
+            </div>
+            <div class="mt-4">
+                <div class="grid grid-cols-2 my-4">
+                    <div class="justify-center">
+                        <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--surface-ground)"
+                                         animationDuration=".5s" aria-label="Custom ProgressSpinner" v-if="createRoomForm.processing"/>
+                    </div>
+                    <div class="flex justify-end" style="height: 3rem">
+                        <primary-button class="mr-5 disabled:cursor-not-allowed"
+                                        :disabled="createRoomForm.processing"
+                                        @click="createRoom">
+                            Submit
+                        </primary-button>
+                        <secondary-button @click="createRoomDialogVisible = false">Cancel</secondary-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Dialog>
 </template>
 
 <style scoped>

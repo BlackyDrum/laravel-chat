@@ -20,6 +20,9 @@ class MessageController extends Controller
 
         $request->validate([
             'message' => 'required|string|max:512',
+            'room_id' => 'required|integer|exists:rooms,id'
+        ],[
+            'room_id.*' => "Please join or create a room"
         ]);
 
         if ($request->input('message')[0] == '/' && Auth::user()->admin)
@@ -102,7 +105,8 @@ class MessageController extends Controller
             function() use ($request) {
                 Message::query()->create([
                     'message' => $request->input('message'),
-                    'creator_id' => Auth::id()
+                    'creator_id' => Auth::id(),
+                    'room_id' => $request->input('room_id'),
                 ]);
 
                 event(new MessageSent());
