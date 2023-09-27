@@ -279,9 +279,9 @@ function scrollToBottom() {
         </div>
     </Layout>
 
-    <Dialog v-model:visible="createRoomDialogVisible" :closable="false" :draggable="false" modal header="Create new Room" :style="{ width: '50vw' }">
+    <Dialog v-model:visible="createRoomDialogVisible" :closable="false" :draggable="false" modal header="Create new Room" class="max-md:w-[90%]">
         <div class="mt-5">
-            <div class="grid grid-cols-2 max-lg:grid-cols-1 gap-4">
+            <div class="grid grid-cols-2 max-lg:grid-cols-1 gap-6">
                 <div>
                     <span class="p-float-label">
                         <InputText v-model="createRoomForm.name" :disabled="createRoomForm.processing" class="w-full" />
