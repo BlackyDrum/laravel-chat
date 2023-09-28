@@ -46,7 +46,7 @@ class HomeController extends Controller
             }
             else if ($room->id != Auth::user()->room_id)
             {
-                abort(403, "Too many users in this room");
+                return back()->withErrors(['message' => "Too many users in this room"]);
             }
         }
 

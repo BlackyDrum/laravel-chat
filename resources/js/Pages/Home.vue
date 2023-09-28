@@ -157,6 +157,10 @@ const joinRoom = (id) => {
     Echo.leave(`chat.${(new URLSearchParams(window.location.search)).get('id')}`);
     router.get('/',{
         id: id,
+    },{
+        onError: (error) => {
+            window.toast.add({ severity: 'error', summary: 'Error', detail: error.message, life: 5000 });
+        }
     })
 }
 
