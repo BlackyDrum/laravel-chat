@@ -1,8 +1,8 @@
-<img align="left" src="https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/ea09295d-bde2-4279-935a-aa920c410854" />
+<img align="left" src="https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/8cf5d9b1-a721-4373-8c0b-2b67394f3edb" />
 
 <br />
 
-<img src="https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/0d4d9da6-d0ab-47c8-8ee0-90ccbe40a0e7"><br />
+<img src="https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/fd05d6a1-7b58-41a4-ac17-94e6d7b83013"><br />
 
 **Made with Laravel, Vue and Inertia**
 
@@ -14,7 +14,7 @@
 
 <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white"> <img src="https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D"> <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"> <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white">
 
-![example-chat-4](https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/6d9701f9-6187-4077-8920-6f6978193d56)
+![example-chat-4](https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/872c8356-498b-4e5c-bee5-4b74abb1083c)
 
 ## Requirements
 <ul>
