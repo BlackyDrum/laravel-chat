@@ -229,7 +229,7 @@ function scrollToBottom() {
                     <ScrollPanel  style="width: 100%; height: 33rem">
                         <div class="mt-4 w-3/4 mx-auto">
                             <Card class="mt-2" v-for="room in rooms" :key="room.id">
-                                <template #title> {{room.name}} ({{userInRooms[room.id] || 0}}/{{room.count}}) </template>
+                                <template #title> <span class="break-all">{{room.name}} ({{userInRooms[room.id] || 0}}/{{room.count}})</span> </template>
                                 <template #content>
                                     <Button class="w-full" @click="joinRoom(room.id)" icon="pi pi-arrow-right" label="Join Room"></Button>
                                     <Button class="w-full mt-1" @click="deleteRoom(room.id)" v-if="room.creator_id === user.id || user.admin" icon="pi pi-trash" severity="danger" label="Delete Room"></Button>
