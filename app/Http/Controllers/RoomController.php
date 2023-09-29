@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\RoomCreatedOrSwitched;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class RoomController extends Controller
 {
@@ -14,7 +15,7 @@ class RoomController extends Controller
         $request->validate([
             'name' => 'required|string|max:32|unique:rooms,name',
             'count' => 'required|integer|min:1|max:10',
-            'description' => 'nullable|string|max:1024'
+            'password' => ['nullable', Rules\Password::default()]
         ]);
 
         if (!Auth::user()->admin)
@@ -28,7 +29,8 @@ class RoomController extends Controller
         Room::query()->create([
             'name' => $request->input('name'),
             'count' => $request->input('count'),
-            'description' => $request->input('description'),
+            'password' => $request->input('password') ? Hash::make($request->input('password')) : null,
+            'has_password' => (bool)$request->input('password'),
             'creator_id' => Auth::id(),
         ]);
     }

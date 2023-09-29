@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\UserInRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use const http\Client\Curl\AUTH_ANY;
 
@@ -37,6 +38,13 @@ class HomeController extends Controller
         {
             $room = Room::query()->findOrFail($request->input('id'));
             $userInRoom = User::query()->where('room_id', '=', $request->input('id'))->count();
+
+            if ($room->creator_id != Auth::id() && !Auth::user()->admin &&
+                ($room->has_password && empty($request->input('password'))
+                    || !empty($request->input('password')) && !Hash::check($request->input('password'),$room->password)))
+            {
+                return back()->withErrors(['message' => "Invalid Password"]);
+            }
 
             if ($room->count > $userInRoom || Auth::user()->admin)
             {

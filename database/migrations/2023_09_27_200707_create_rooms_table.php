@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 32);
             $table->unsignedInteger('count');
-            $table->string('description',1024)->nullable();
+            $table->string('password')->nullable();
             $table->unsignedBigInteger('creator_id');
             $table->timestamps();
 

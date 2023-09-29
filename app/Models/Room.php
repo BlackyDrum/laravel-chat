@@ -14,5 +14,11 @@ class Room extends Model
         'count',
         'description',
         'creator_id',
+        'password',
+        'has_password',
+    ];
+
+    protected $hidden = [
+        'password'
     ];
 }

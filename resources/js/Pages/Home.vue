@@ -76,7 +76,7 @@ const createRoomDialogVisible = ref(false);
 const createRoomForm = useForm({
     name: null,
     count: 1,
-    description: null,
+    password: null,
 })
 
 // METHODS
@@ -128,7 +128,7 @@ const createRoom = () => {
             createRoomDialogVisible.value = false;
             createRoomForm.name = null;
             createRoomForm.count = 1;
-            createRoomForm.description = null;
+            createRoomForm.password = null;
         },
         onFinish: () => {
 
@@ -153,15 +153,34 @@ const deleteRoom = id => {
         })
 }
 
-const joinRoom = (id) => {
-    Echo.leave(`chat.${(new URLSearchParams(window.location.search)).get('id')}`);
-    router.get('/',{
-        id: id,
-    },{
-        onError: (error) => {
-            window.toast.add({ severity: 'error', summary: 'Error', detail: error.message, life: 5000 });
+const joinRoom = (room) => {
+    if (room.has_password && room.creator_id !== user.value.id && !user.value.admin) {
+        let input = prompt('Please enter the room password');
+        if (input) {
+            Echo.leave(`chat.${(new URLSearchParams(window.location.search)).get('id')}`);
+            router.get('/',{
+                id: room.id,
+                password: input,
+            },{
+                onError: (error) => {
+                    window.toast.add({ severity: 'error', summary: 'Error', detail: error.message, life: 5000 });
+                },
+                onSuccess: () => {
+                    window.toast.add({ severity: 'info', summary: 'Info', detail: "Entered new room", life: 5000 });
+                }
+            })
         }
-    })
+    }
+    else {
+        Echo.leave(`chat.${(new URLSearchParams(window.location.search)).get('id')}`);
+        router.get('/',{
+            id: room.id,
+        },{
+            onError: (error) => {
+                window.toast.add({ severity: 'error', summary: 'Error', detail: error.message, life: 5000 });
+            }
+        })
+    }
 }
 
 const formatDate = date => {
@@ -233,8 +252,11 @@ function scrollToBottom() {
                     <ScrollPanel  style="width: 100%; height: 28rem">
                         <div class="mt-4 w-3/4 mx-auto">
                             <div class="mt-2 bg-gray-700/80 p-4 rounded-lg" v-for="room in rooms" :key="room.id">
-                                <span class="break-all font-semibold text-xl">{{room.name}} ({{userInRooms[room.id] || 0}}/{{room.count}})</span>
-                                <Button class="w-full mt-3" @click="joinRoom(room.id)" icon="pi pi-arrow-right" label="Join Room"></Button>
+                                <span class="break-all font-semibold text-xl">
+                                    {{room.name}} ({{userInRooms[room.id] || 0}}/{{room.count}})
+                                    <span v-if="room.has_password" class="pi pi-lock"></span>
+                                </span>
+                                <Button class="w-full mt-3" @click="joinRoom(room)" icon="pi pi-arrow-right" label="Join Room"></Button>
                                 <Button class="w-full mt-3" @click="deleteRoom(room.id)" v-if="room.creator_id === user.id || user.admin" icon="pi pi-trash" severity="danger" label="Delete Room"></Button>
                             </div>
                         </div>
@@ -302,6 +324,15 @@ function scrollToBottom() {
                     <div class="text-red-600 font-semibold" v-if="errors.count">
                         {{errors.count}}
                     </div>
+                </div>
+            </div>
+            <div class="mt-6">
+                <span class="p-float-label">
+                        <InputText type="password" v-model="createRoomForm.password" :disabled="createRoomForm.processing" class="w-full" />
+                        <label>Password (optional)</label>
+                </span>
+                <div class="text-red-600 font-semibold" v-if="errors.password">
+                    {{errors.password}}
                 </div>
             </div>
             <div class="text-red-600 font-semibold mt-2" v-if="errors.max_rooms">
