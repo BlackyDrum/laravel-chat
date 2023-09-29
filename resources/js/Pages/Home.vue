@@ -271,7 +271,7 @@ function scrollToBottom() {
             <div class="my-auto" v-else>
                 <ScrollPanel ref="scrollPanel" class="h-[40rem] w-[95%] self-center mx-auto bg-gray-800 rounded-t-lg">
                     <div class="relative group m-3 px-6 py-2 bg-gray-400 rounded-lg w-fit max-w-4xl"
-                         :class="{'bg-gray-200/90 sm:ml-auto': message.user_id === user.id, 'hover:bg-opacity-10 hover:cursor-pointer': user.admin}" v-for="message in messages"
+                         :class="{'bg-gray-200 sm:ml-auto': message.user_id === user.id, 'hover:bg-opacity-10 hover:cursor-pointer': user.admin}" v-for="message in messages"
                          @click="deleteMessage(message.id)">
                         <div v-if="user.admin" class="absolute invisible left-1/2 top-1/2 group-hover:visible">
                             <span class="pi pi-trash text-red-600" style="font-size: x-large"></span>
