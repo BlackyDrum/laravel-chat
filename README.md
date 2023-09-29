@@ -4,7 +4,7 @@
 
 <img src="https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/ca5843d5-835f-4c13-8134-33cd58967c1f"><br />
 
-**Made with Laravel, Vue and Inertia**
+**Engage in real-time conversations with others**
 
 <br />
 
@@ -14,7 +14,13 @@
 
 <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white"> <img src="https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D"> <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"> <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white">
 
- ![example-chat-4](https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/741cd820-86ec-40ff-b8b9-5827b65927a8)
+![example-chat-5](https://github.com/BlackyDrum/laravel-chatroom/assets/111639941/b87c0289-e5c0-4213-b8a4-11a7a23acf4b)
+
+## Features
+- Create chat rooms with optional passwords
+- Real-time chat with other users
+- OAuth authentication with Google and GitHub
+- Admin commands for user management
 
 ## Requirements
 <ul>
