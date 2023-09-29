@@ -17,6 +17,10 @@ class HomeController extends Controller
 {
     public function show(Request $request)
     {
+        $request->validate([
+            'id' => 'nullable|integer|exists:rooms,id'
+        ]);
+
         $messages = Message::query()
             ->join('users', 'users.id', '=', 'messages.creator_id')
             ->where('users.banned', '=', 'false')
