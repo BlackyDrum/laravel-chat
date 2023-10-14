@@ -1,0 +1,108 @@
+version: '2.0'
+services:
+
+  # PHP Service (Laravel Application)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: php
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/html/
+    volumes:
+      - ./:/var/www/html/
+      - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
+    networks:
+      - app-network
+    depends_on:
+      - websockets  # This ensures the WebSocket server is started before the app
+
+  # Nginx Service (Reverse Proxy)
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - app-network
+
+  # First Web Server (webserver1)
+  webserver1:
+    image: nginx:alpine
+    container_name: webserver1
+    restart: unless-stopped
+    tty: true
+    environment:
+      VIRTUAL_HOST: localhost
+    volumes:
+      - ./:/var/www/html/
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  # Second Web Server (webserver2)
+  webserver2:
+    image: nginx:alpine
+    container_name: webserver2
+    restart: unless-stopped
+    tty: true
+    environment:
+      VIRTUAL_HOST: localhost
+    volumes:
+      - ./:/var/www/html/
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  # WebSocket Server Service
+  websockets:
+    build:
+      context: .
+      dockerfile: DockerfileWebsockets
+    container_name: websockets
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "6001:6001"  # Expose port 6001 for WebSocket server
+    volumes:
+      - ./websockets:/app
+    networks:
+      - app-network
+
+  # MySQL Service
+  db:
+    image: mysql:5.7.32
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: laravel
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+
+# Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
+# Volumes
+volumes:
+  dbdata:
+    driver: local
+
