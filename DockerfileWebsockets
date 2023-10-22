@@ -44,6 +44,6 @@ RUN chown -R www-data:www-data \
         /var/www/html/storage \
         /var/www/html/bootstrap/cache
 
-# Expose port 9000 and start php-fpm server (for FastCGI Process Manager)
+# Expose port 6001 and start the websocket server
 EXPOSE 6001
 CMD ["php", "artisan", "websockets:serve"]
