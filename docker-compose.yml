@@ -41,7 +41,7 @@ services:
     restart: unless-stopped
     tty: true
     environment:
-      VIRTUAL_HOST: localhost
+      VIRTUAL_HOST: laravel-chat.localhost
     volumes:
       - ./:/var/www/html/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
@@ -55,7 +55,21 @@ services:
     restart: unless-stopped
     tty: true
     environment:
-      VIRTUAL_HOST: localhost
+      VIRTUAL_HOST: laravel-chat.localhost
+    volumes:
+      - ./:/var/www/html/
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  # Third Web Server (webserver3)
+  webserver3:
+    image: nginx:alpine
+    container_name: webserver3
+    restart: unless-stopped
+    tty: true
+    environment:
+      VIRTUAL_HOST: laravel-chat.localhost
     volumes:
       - ./:/var/www/html/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
