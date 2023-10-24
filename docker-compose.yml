@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: php
+    image: cloudsigma.com/php
     container_name: app
     restart: unless-stopped
     tty: true
@@ -76,6 +76,20 @@ services:
     networks:
       - app-network
 
+  # Fourth Web Server (webserver4)
+  webserver4:
+    image: nginx:alpine
+    container_name: webserver4
+    restart: unless-stopped
+    tty: true
+    environment:
+      VIRTUAL_HOST: laravel-chat.localhost
+    volumes:
+      - ./:/var/www/html/
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
   # WebSocket Server Service
   websockets:
     build:
@@ -90,6 +104,66 @@ services:
       - ./websockets:/app
     networks:
       - app-network
+
+  prometheus:
+    image: bitnami/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - app-network
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  # NGINX Prometheus Exporter for webserver1
+  nginx-exporter-webserver1:
+    image: nginx/nginx-prometheus-exporter:0.10.0
+    ports:
+      - "9113:9113"
+    command: -nginx.scrape-uri=http://webserver1:80/metrics -web.telemetry-path=/metrics
+    networks:
+      - app-network
+    depends_on:
+      - webserver1
+
+  # NGINX Prometheus Exporter for webserver2
+  nginx-exporter-webserver2:
+    image: nginx/nginx-prometheus-exporter:0.10.0
+    ports:
+      - "9114:9113"
+    command: -nginx.scrape-uri=http://webserver2:80/metrics -web.telemetry-path=/metrics
+    networks:
+      - app-network
+    depends_on:
+      - webserver2
+
+  # NGINX Prometheus Exporter for webserver3
+  nginx-exporter-webserver3:
+    image: nginx/nginx-prometheus-exporter:0.10.0
+    ports:
+      - "9115:9113"
+    command: -nginx.scrape-uri=http://webserver3:80/metrics -web.telemetry-path=/metrics
+    networks:
+      - app-network
+    depends_on:
+      - webserver3
+
+  # NGINX Prometheus Exporter for webserver4
+  nginx-exporter-webserver4:
+    image: nginx/nginx-prometheus-exporter:0.10.0
+    ports:
+      - "9116:9113"
+    command: -nginx.scrape-uri=http://webserver4:80/metrics -web.telemetry-path=/metrics
+    networks:
+      - app-network
+    depends_on:
+      - webserver4
 
   # MySQL Service
   db:
@@ -119,4 +193,3 @@ networks:
 volumes:
   dbdata:
     driver: local
-
